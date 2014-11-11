@@ -1,7 +1,11 @@
 package br.com.mobilita.cadastrocaelum;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -26,17 +30,17 @@ public class ListaAlunos extends ActionBarActivity {
         lista.setAdapter(adapter);
 
         /*
-         *
+         * 
          * Clique curto usa-se este método
          */
         lista.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(final AdapterView<?> adapter, final View view,
-                            final int position, final long id) {
+                                    final int position, final long id) {
 
                 Toast.makeText(ListaAlunos.this, "Posição clicada = " + (id + 1) + "",
-                                Toast.LENGTH_SHORT).show();
+                    Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -50,17 +54,43 @@ public class ListaAlunos extends ActionBarActivity {
 
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapter, final View view,
-                            final int posicao, final long id) {
+                                           final int posicao, final long id) {
 
                 Toast.makeText(ListaAlunos.this,
-                                "Clique longo em = " + adapter.getItemAtPosition(posicao),
-                                Toast.LENGTH_SHORT).show();
+                    "Clique longo em = " + adapter.getItemAtPosition(posicao),
+                    Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
 
+        final MenuInflater inflater = getMenuInflater();
+
+        inflater.inflate(R.menu.lista_alunos, menu);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
+        final int itemClicado = item.getItemId();
+
+        switch (itemClicado) {
+            case R.id.novo:
+                final Intent chamaTelaFormAluno = new Intent(this, Formulario.class);
+                startActivity(chamaTelaFormAluno);
+                break;
+
+            default:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
 }
