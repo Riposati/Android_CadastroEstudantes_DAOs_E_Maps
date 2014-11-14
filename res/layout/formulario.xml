@@ -14,16 +14,23 @@
             android:orientation="vertical" >
 
             <ImageView
-                android:layout_width="wrap_content"
+                android:id="@+id/foto"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:src="@drawable/ic_launcher" />
+                android:src="@drawable/camera" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/tire_uma_foto_tocando_na_imagem_ou_icone_android_" />
 
             <TextView
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nome:" />
+                android:text="@string/nome_" />
 
             <EditText
                 android:id="@+id/et_nome"

@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="br.com.mobilita.cadastrocaelum.ListaAlunos" >
+    tools:context="listagemEstudantes.ListaAlunos" >
 
     <ListView
         android:id="@+id/lista"

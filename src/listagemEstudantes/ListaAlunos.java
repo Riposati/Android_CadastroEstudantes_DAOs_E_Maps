@@ -1,8 +1,9 @@
-package br.com.mobilita.cadastrocaelum;
+package listagemEstudantes;
 
 import java.util.List;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.ContextMenu;
@@ -17,7 +18,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 import br.com.mobilita.cadastro.modelo.Aluno;
+import br.com.mobilita.cadastrocaelum.Formulario;
+import br.com.mobilita.cadastrocaelum.R;
 import br.com.mobilita.dao.AlunoDAO;
 
 
@@ -36,14 +40,14 @@ public class ListaAlunos extends ActionBarActivity {
         registerForContextMenu(this.lista); // para mostrar no menu quando se é dado clique longo
 
         /*
-         * 
+         *
          * Clique curto usa-se este método
          */
         this.lista.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(final AdapterView<?> adapter, final View view,
-                            final int position, final long id) {
+                                    final int position, final long id) {
 
                 // Toast.makeText(ListaAlunos.this, "Posição clicada = " + (id + 1) + "",
                 // Toast.LENGTH_SHORT).show();
@@ -66,7 +70,7 @@ public class ListaAlunos extends ActionBarActivity {
 
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapter, final View view,
-                            final int posicao, final long id) {
+                                           final int posicao, final long id) {
                 //
                 // Toast.makeText(ListaAlunos.this,
                 // "Clique longo em = " + adapter.getItemAtPosition(posicao),
@@ -89,9 +93,51 @@ public class ListaAlunos extends ActionBarActivity {
 
         super.onCreateContextMenu(menu, v, menuInfo);
 
-        menu.add("SMS");
-        menu.add("Navegar no site");
-        menu.add("Ligar");
+        menu.add("Enviar mensagem");
+        final MenuItem navegar = menu.add("Navegar no site");
+
+        navegar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(final MenuItem item) {
+
+                if (ListaAlunos.this.aluno.getSite() != null) {
+
+                    final Intent site = new Intent(Intent.ACTION_VIEW);
+
+                    final Uri dados;
+                    dados = Uri.parse("http://" + ListaAlunos.this.aluno.getSite());
+                    site.setData(dados);
+                    startActivity(site);
+                } else {
+                    Toast.makeText(ListaAlunos.this, "Estudante nao possui site", Toast.LENGTH_LONG)
+                    .show();
+                }
+
+                return false;
+            }
+        });
+
+        final MenuItem ligar = menu.add("Ligar");
+
+        ligar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(final MenuItem item) {
+
+                final Intent it = new Intent(Intent.ACTION_CALL);
+
+                final Uri discagem = Uri.parse("tel:" + ListaAlunos.this.aluno.getTelefone());
+
+                it.setData(discagem);
+
+                startActivity(it);
+
+                return false;
+            }
+        });
+
+
         final MenuItem deletar = menu.add("Deletar"); // ao clicar longo uma opção do menu pode
         // responder ao clique através de u evento
         deletar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
@@ -114,8 +160,9 @@ public class ListaAlunos extends ActionBarActivity {
             }
         });
 
-        menu.add("Ver no mapa");
+        menu.add("Visualizar localizacao");
         menu.add("Enviar e-mail");
+
     }
 
     @Override

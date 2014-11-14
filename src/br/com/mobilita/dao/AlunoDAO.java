@@ -39,7 +39,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
     public void onCreate(final SQLiteDatabase db) {
 
         final String ddl =
-                        "create table Alunos(primary key(id)," + "nome text unique not null,"
+                        "create table Alunos(id primary key," + "nome text unique not null,"
                                         + "telefone text, endereco text,"
                                         + "site text,foto text, nota real);";
         db.execSQL(ddl);
@@ -60,7 +60,7 @@ public class AlunoDAO extends SQLiteOpenHelper {
         final String colunas[] = {"id", "nome", "site", "telefone", "endereco", "foto", "nota"};
         final Cursor cursor =
                         getWritableDatabase()
-                                        .query("alunos", colunas, null, null, null, null, null); // select
+                        .query("alunos", colunas, null, null, null, null, null); // select
         // do
         // android
 
@@ -93,6 +93,23 @@ public class AlunoDAO extends SQLiteOpenHelper {
 
         final String[] args = {aluno.getNome()};
         getWritableDatabase().delete("Alunos", "nome=?", args);
+    }
+
+    public void atualizar(final Aluno aluno) {
+
+        final String args[] = {aluno.getNome()};
+
+        final ContentValues content = new ContentValues();
+
+        content.put("nome", aluno.getNome());
+        content.put("site", aluno.getSite());
+        content.put("telefone", aluno.getTelefone());
+        content.put("endereco", aluno.getEndereco());
+        content.put("foto", aluno.getFoto());
+        content.put("nota", aluno.getNotas());
+
+        getWritableDatabase().update("alunos", content, "nome=?", args);
+
     }
 
 

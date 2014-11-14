@@ -1,43 +1,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:yourapp="http://schemas.android.com/apk/res-auto"
     tools:context="br.com.mobilita.cadastrocaelum.ListaAlunos" >
 
     <item
         android:id="@+id/novo"
-        android:icon="@drawable/teste"
-        android:showAsAction="ifRoom"
-        android:title="Novo"/>
-    <item
-        android:id="@+id/mapa"
-        android:icon="@drawable/teste"
-        android:showAsAction="ifRoom"
-        android:title="Mapa"/>
+        android:icon="@drawable/mais"
+        android:title="Novo"
+        yourapp:showAsAction="always"/>
     <item
         android:id="@+id/opcoes"
         android:icon="@drawable/teste"
-        android:showAsAction="ifRoom"
         android:title="Opções">
-
-        <!--
         <menu>
             <item
                 android:id="@+id/enviar_alunos"
                 android:icon="@drawable/teste"
-                android:showAsAction="ifRoom"
-                android:title="Sincronizar"/>
+                android:title="Sincronizar Estudantes"/>
             <item
                 android:id="@+id/receber_provas"
                 android:icon="@drawable/teste"
-                android:showAsAction="ifRoom"
-                android:title="Baixar Provas"/>
-            <item
-                android:id="@+id/preferencias"
-                android:icon="@drawable/teste"
-                android:showAsAction="ifRoom"
                 android:title="Baixar Provas"/>
         </menu>
-        -->
     </item>
 
 </menu>
