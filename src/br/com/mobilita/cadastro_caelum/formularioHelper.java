@@ -1,4 +1,4 @@
-package br.com.mobilita.cadastrocaelum;
+package br.com.mobilita.cadastro_caelum;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import br.com.mobilita.cadastro.modelo.Aluno;
+import br.com.mobilita.cadastrocaelum.R;
 
 public class formularioHelper {
 
@@ -65,20 +66,23 @@ public class formularioHelper {
 
         this.aluno.setFoto(caminhoArquivo);
 
+
         final Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
 
         final Bitmap imagemReduzida = Bitmap.createScaledBitmap(imagem, 400, 400, true);
 
         final Matrix matrix = new Matrix();
-        matrix.postRotate(270);
+        matrix.postRotate(-90);
         final Bitmap rotated =
                         Bitmap.createBitmap(imagemReduzida, 0, 0, imagemReduzida.getWidth(),
                                         imagemReduzida.getHeight(), matrix, true); // aqui sera
-                                                                                   // rotacionada a
-                                                                                   // imagem para
-                                                                                   // ser organizada
+        // rotacionada a
+        // imagem para
+        // ser organizada
 
         this.iv_foto.setImageBitmap(rotated);
+
+
     }
 
 }

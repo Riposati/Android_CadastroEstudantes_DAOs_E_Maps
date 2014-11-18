@@ -1,4 +1,4 @@
-package br.com.mobilita.cadastrocaelum;
+package br.com.mobilita.cadastro_caelum;
 
 import java.io.File;
 
@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Toast;
 import br.com.mobilita.cadastro.modelo.Aluno;
+import br.com.mobilita.cadastrocaelum.R;
 import br.com.mobilita.dao.AlunoDAO;
 
 public class Formulario extends ActionBarActivity {

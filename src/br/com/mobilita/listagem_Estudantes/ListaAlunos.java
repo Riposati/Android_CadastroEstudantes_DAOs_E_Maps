@@ -1,4 +1,4 @@
-package listagemEstudantes;
+package br.com.mobilita.listagem_Estudantes;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import br.com.mobilita.Listagem_Estudantes_Adapter.LinhaAlunosAdapter;
 import br.com.mobilita.cadastro.modelo.Aluno;
-import br.com.mobilita.cadastrocaelum.Formulario;
+import br.com.mobilita.cadastro_caelum.Formulario;
 import br.com.mobilita.cadastrocaelum.R;
 import br.com.mobilita.dao.AlunoDAO;
 
@@ -180,9 +180,10 @@ public class ListaAlunos extends ActionBarActivity {
 
         alunoDao.close();
 
-        final int layout = android.R.layout.simple_list_item_1;
+        final LinhaAlunosAdapter adapter = new LinhaAlunosAdapter(alunos, ListaAlunos.this);
 
-        final ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, layout, alunos);
+        // LayoutInflater layoutInflater = getLayoutInflater(); // pegar série de elementos XML e
+        // transformar em objetos no java
 
         this.lista.setAdapter(adapter);
     }

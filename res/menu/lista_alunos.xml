@@ -20,8 +20,11 @@
                 android:title="Sincronizar Estudantes"/>
             <item
                 android:id="@+id/receber_provas"
-                android:icon="@drawable/teste"
+                android:icon="@drawable/baixar_provas"
                 android:title="Baixar Provas"/>
+            <item
+                android:id="@+id/preferencias"
+                android:title="Preferencias"/>
         </menu>
     </item>
 
