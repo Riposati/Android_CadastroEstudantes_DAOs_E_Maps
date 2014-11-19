@@ -56,10 +56,14 @@ public class LinhaAlunosAdapter extends BaseAdapter {
         linha.setBackgroundColor(Color.BLACK);
 
         final TextView nome = (TextView) linha.findViewById(R.id.nome);
+        final TextView telefone = (TextView) linha.findViewById(R.id.telefone);
+        final TextView site = (TextView) linha.findViewById(R.id.site);
+
 
         nome.setTextColor(Color.WHITE);
 
         nome.setText(this.alunos.get(position).getNome());
+
 
         final ImageView imagem = (ImageView) linha.findViewById(R.id.foto);
 
@@ -90,6 +94,16 @@ public class LinhaAlunosAdapter extends BaseAdapter {
                             this.activity.getResources().getDrawable(R.drawable.sem_imagem);
             imagem.setImageDrawable(semFoto);
 
+        }
+
+        if (telefone != null) {
+            telefone.setTextColor(Color.WHITE);
+            telefone.setText(this.alunos.get(position).getTelefone());
+        }
+
+        if (site != null) {
+            site.setTextColor(Color.WHITE);
+            site.setText(this.alunos.get(position).getSite());
         }
 
         return linha;

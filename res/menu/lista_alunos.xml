@@ -11,19 +11,20 @@
         yourapp:showAsAction="always"/>
     <item
         android:id="@+id/opcoes"
-        android:icon="@drawable/teste"
-        android:title="Opções">
+        android:icon="@drawable/sincronizar"
+        android:title="Opções Extras">
         <menu>
             <item
                 android:id="@+id/enviar_alunos"
-                android:icon="@drawable/teste"
-                android:title="Sincronizar Estudantes"/>
+                android:icon="@drawable/sincronizar"
+                android:title="Calcular média das notas"/>
             <item
                 android:id="@+id/receber_provas"
-                android:icon="@drawable/baixar_provas"
-                android:title="Baixar Provas"/>
+                android:icon="@drawable/provas"
+                android:title="Visualizar Provas"/>
             <item
                 android:id="@+id/preferencias"
+                android:icon="@drawable/preferencias"
                 android:title="Preferencias"/>
         </menu>
     </item>

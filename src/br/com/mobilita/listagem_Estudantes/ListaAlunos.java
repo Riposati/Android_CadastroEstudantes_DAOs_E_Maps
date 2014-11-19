@@ -23,6 +23,7 @@ import br.com.mobilita.cadastro.modelo.Aluno;
 import br.com.mobilita.cadastro_caelum.Formulario;
 import br.com.mobilita.cadastrocaelum.R;
 import br.com.mobilita.dao.AlunoDAO;
+import br.com.mobilita.listagem_Estudantes.task.EnviaAlunosTask;
 
 
 public class ListaAlunos extends ActionBarActivity {
@@ -209,11 +210,16 @@ public class ListaAlunos extends ActionBarActivity {
                 startActivity(chamaTelaFormAluno);
                 break;
 
+            case R.id.enviar_alunos:
+
+                final EnviaAlunosTask enviaAlunosTask = new EnviaAlunosTask(this);
+                enviaAlunosTask.execute();
+                break;
+
             default:
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
-
 }
