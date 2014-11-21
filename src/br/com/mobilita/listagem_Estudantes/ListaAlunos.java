@@ -21,6 +21,7 @@ import android.widget.Toast;
 import br.com.mobilita.Listagem_Estudantes_Adapter.LinhaAlunosAdapter;
 import br.com.mobilita.cadastro.modelo.Aluno;
 import br.com.mobilita.cadastro_caelum.Formulario;
+import br.com.mobilita.cadastro_caelum.MostraAlunosProximos;
 import br.com.mobilita.cadastrocaelum.R;
 import br.com.mobilita.dao.AlunoDAO;
 import br.com.mobilita.listagem_Estudantes.task.EnviaAlunosTask;
@@ -161,7 +162,22 @@ public class ListaAlunos extends ActionBarActivity {
             }
         });
 
-        menu.add("Visualizar localizacao");
+        final MenuItem localizacao = menu.add("Visualizar localizacao");
+
+        localizacao.setOnMenuItemClickListener(new OnMenuItemClickListener() {
+
+            @Override
+            public boolean onMenuItemClick(final MenuItem item) {
+
+                final Intent it = new Intent(ListaAlunos.this, MostraAlunosProximos.class);
+
+                startActivity(it);
+
+                return false;
+            }
+        });
+
+
         menu.add("Enviar e-mail");
 
     }
