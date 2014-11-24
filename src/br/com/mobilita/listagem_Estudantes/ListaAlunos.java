@@ -22,10 +22,11 @@ import br.com.mobilita.Listagem_Estudantes_Adapter.LinhaAlunosAdapter;
 import br.com.mobilita.cadastro.modelo.Aluno;
 import br.com.mobilita.cadastro_caelum.Formulario;
 import br.com.mobilita.cadastro_caelum.MostraAlunosProximos;
+import br.com.mobilita.cadastro_caelum.Preferencias;
+import br.com.mobilita.cadastro_caelum.Provas;
 import br.com.mobilita.cadastrocaelum.R;
 import br.com.mobilita.dao.AlunoDAO;
 import br.com.mobilita.listagem_Estudantes.task.EnviaAlunosTask;
-
 
 public class ListaAlunos extends ActionBarActivity {
 
@@ -35,7 +36,7 @@ public class ListaAlunos extends ActionBarActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.listagemalunos);
+        setContentView(R.layout.listagem_alunos);
 
         this.lista = (ListView) findViewById(R.id.lista);
 
@@ -230,6 +231,19 @@ public class ListaAlunos extends ActionBarActivity {
 
                 final EnviaAlunosTask enviaAlunosTask = new EnviaAlunosTask(this);
                 enviaAlunosTask.execute();
+                break;
+
+            case R.id.receber_provas:
+
+                final Intent it = new Intent(this, Provas.class);
+
+                startActivity(it);
+
+                break;
+
+            case R.id.preferencias:
+                final Intent abreTelaPreferencias = new Intent(this, Preferencias.class);
+                startActivity(abreTelaPreferencias);
                 break;
 
             default:

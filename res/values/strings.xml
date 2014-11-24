@@ -6,5 +6,12 @@
     <string name="action_settings">Settings</string>
     <string name="nome_">Nome:</string>
     <string name="tire_uma_foto_tocando_na_imagem_ou_icone_android_">tire sua foto tocando na imagem</string>
+    <string name="detalhes_da_prova">Detalhes da prova</string>
+    <string name="data">data:</string>
+    <string name="title_activity_provas">Provas</string>
+    <string name="materia_da_prova_">"Materia da prova : "</string>
+    <string name="data_da_prova_">"Data da prova : "</string>
+    <string name="topicos">topicos</string>
+    <string name="em_construcao">Em construcao</string>
 
 </resources>

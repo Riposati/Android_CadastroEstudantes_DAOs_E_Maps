@@ -16,30 +16,31 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapaFragment extends SupportMapFragment {
 
-    GoogleMap mapa = getMap();
-    MarkerOptions marcadores;
-    MarkerOptions marcadorLugarAtual;
+    private MarkerOptions marcadores;
+    private MarkerOptions marcadorLugarAtual;
+    private GoogleMap mapa = getMap();
 
     @Override
     public void onResume() {
-
-        super.onResume();
-
         final FragmentActivity contexto = getActivity();
 
         final LatLng localA =
                         new Localizador(contexto)
-                                        .getCoordenada("R. Cândida Mendonça Bilharinho, 631 - Mercês MG");
+        .getCoordenada("R. Cândida Mendonça Bilharinho, 631 - Mercês MG");
+
+        this.marcadorLugarAtual = new MarkerOptions().title("Mobilità Sistemas").position(localA);
+
+        super.onResume();
 
         final AlunoDAO dao = new AlunoDAO(contexto);
 
-        this.marcadorLugarAtual = new MarkerOptions().title("Local Atual").position(localA);
-
         final List<Aluno> listaAlunos = dao.getLista();
 
-        for (int i = 0; i < listaAlunos.size(); i++) {
+        dao.close();
 
-            this.mapa = getMap();
+        this.mapa = getMap();
+
+        for (int i = 0; i < listaAlunos.size(); i++) {
 
             final LatLng localAluno =
                             new Localizador(contexto).getCoordenada(listaAlunos.get(i)
@@ -52,10 +53,10 @@ public class MapaFragment extends SupportMapFragment {
                                 localAluno);
             this.mapa.addMarker(this.marcadores);
 
-        }
+            this.mapa.addMarker(this.marcadorLugarAtual);
 
-        this.mapa.addMarker(this.marcadorLugarAtual);
-        dao.close();
+
+        }
     }
 
     public void localizaRegiao(final LatLng local) {
