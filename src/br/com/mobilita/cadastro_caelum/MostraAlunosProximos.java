@@ -11,13 +11,14 @@ import br.com.mobilita.cadastrocaelum.R;
 public class MostraAlunosProximos extends FragmentActivity {
 
 
-    AtualizaPosicao atualizar;
+    private AtualizaPosicao atualizar;
+
 
     @Override
     protected void onCreate(final Bundle arg0) {
         super.onCreate(arg0);
-
         setContentView(R.layout.map_layout);
+
 
         final FragmentManager manager = getSupportFragmentManager();
 
@@ -33,10 +34,14 @@ public class MostraAlunosProximos extends FragmentActivity {
 
     }
 
+
+
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
         this.atualizar.destruir();
+
 
     }
 }

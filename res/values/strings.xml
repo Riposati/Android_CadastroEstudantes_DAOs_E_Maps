@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Agenda de alunos</string>
+    <string name="app_name">MoveOn</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="nome_">Nome:</string>
@@ -13,5 +13,7 @@
     <string name="data_da_prova_">"Data da prova : "</string>
     <string name="topicos">topicos</string>
     <string name="em_construcao">Em construcao</string>
+    <string name="email">email</string>
+    <string name="title_activity_teste_maps">TesteMaps</string>
 
 </resources>

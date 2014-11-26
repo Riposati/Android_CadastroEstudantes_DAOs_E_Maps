@@ -10,6 +10,11 @@
         android:title="Novo"
         yourapp:showAsAction="always"/>
     <item
+        android:id="@+id/mapa"
+        android:icon="@drawable/marcador"
+        android:title="Mapa"
+        yourapp:showAsAction="always"/>
+    <item
         android:id="@+id/opcoes"
         android:icon="@drawable/sincronizar"
         android:title="Opções Extras">
@@ -22,10 +27,11 @@
                 android:id="@+id/receber_provas"
                 android:icon="@drawable/provas"
                 android:title="Visualizar Provas"/>
-            <item
-                android:id="@+id/preferencias"
-                android:icon="@drawable/preferencias"
-                android:title="Preferencias"/>
+            <!-- <item -->
+            <!-- android:id="@+id/preferencias" -->
+            <!-- android:icon="@drawable/preferencias" -->
+            <!-- android:title="Preferencias"/> -->
+
         </menu>
     </item>
 

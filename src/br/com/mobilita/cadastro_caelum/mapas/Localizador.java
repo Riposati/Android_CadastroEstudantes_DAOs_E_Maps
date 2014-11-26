@@ -33,7 +33,6 @@ public class Localizador {
                 final double longitude = localizacao.getLongitude();
 
 
-
                 return new LatLng(latitude, longitude);
 
 

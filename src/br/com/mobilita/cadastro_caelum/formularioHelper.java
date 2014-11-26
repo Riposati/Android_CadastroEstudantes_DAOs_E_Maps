@@ -64,23 +64,25 @@ public class formularioHelper {
 
     public void carregaImagem(final String caminhoArquivo) {
 
-        this.aluno.setFoto(caminhoArquivo);
+        if (caminhoArquivo != null) {
+            this.aluno.setFoto(caminhoArquivo);
 
 
-        final Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
+            final Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
 
-        final Bitmap imagemReduzida = Bitmap.createScaledBitmap(imagem, 400, 400, true);
+            final Bitmap imagemReduzida = Bitmap.createScaledBitmap(imagem, 400, 400, true);
 
-        final Matrix matrix = new Matrix();
-        matrix.postRotate(-90);
-        final Bitmap rotated =
-                        Bitmap.createBitmap(imagemReduzida, 0, 0, imagemReduzida.getWidth(),
-                                        imagemReduzida.getHeight(), matrix, true); // aqui sera
-        // rotacionada a
-        // imagem para
-        // ser organizada
+            final Matrix matrix = new Matrix();
+            matrix.postRotate(-90);
+            final Bitmap rotated =
+                            Bitmap.createBitmap(imagemReduzida, 0, 0, imagemReduzida.getWidth(),
+                                            imagemReduzida.getHeight(), matrix, true); // aqui sera
+            // rotacionada a
+            // imagem para
+            // ser organizada
 
-        this.iv_foto.setImageBitmap(rotated);
+            this.iv_foto.setImageBitmap(rotated);
+        }
 
 
     }

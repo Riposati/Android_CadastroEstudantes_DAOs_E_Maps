@@ -31,18 +31,18 @@ public class Formulario extends ActionBarActivity {
     private RatingBar rb_nota;
     private Aluno aluno;
     private String caminhoArquivo;
+    private EditText et_email;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.formulario);
 
         Formulario.this.helper = new formularioHelper(Formulario.this);
 
         /*
-         * 
+         *
          * essas duas chamadas servem para organizar a classe Formulário
          */
 
@@ -52,6 +52,7 @@ public class Formulario extends ActionBarActivity {
         this.et_telefone = (EditText) findViewById(R.id.et_telefone);
         this.rb_nota = (RatingBar) findViewById(R.id.rb_nota);
         this.bt_gravar = (Button) findViewById(R.id.bt_gravar);
+        this.et_email = (EditText) findViewById(R.id.et_email);
 
         final Intent it = getIntent();
 
@@ -103,7 +104,7 @@ public class Formulario extends ActionBarActivity {
 
                     if (Formulario.this.aluno.getNome().isEmpty()) {
                         Toast.makeText(Formulario.this, "Informe um nome!", Toast.LENGTH_LONG)
-                                        .show();
+                        .show();
                     } else {
 
                         final AlunoDAO dao = new AlunoDAO(Formulario.this);
@@ -118,7 +119,7 @@ public class Formulario extends ActionBarActivity {
         }
 
         /*
-         * 
+         *
          * Parte da imagem do estudante e daqui pra baixo
          */
 
@@ -162,7 +163,7 @@ public class Formulario extends ActionBarActivity {
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode,
-                    final Intent intencao) {
+                                    final Intent intencao) {
 
         if (requestCode == 123) {
 

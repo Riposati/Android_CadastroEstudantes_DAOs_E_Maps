@@ -70,29 +70,30 @@ public class LinhaAlunosAdapter extends BaseAdapter {
         if (this.alunos.get(position).getFoto() != null) {
 
             final Bitmap foto = BitmapFactory.decodeFile(this.alunos.get(position).getFoto());
-            final Bitmap imagemReduzida = Bitmap.createScaledBitmap(foto, 220, 220, true);
-            imagem.setImageBitmap(imagemReduzida);
-            final Matrix matrix = new Matrix();
-            matrix.postRotate(-90);
-            final Bitmap rotated =
-                            Bitmap.createBitmap(imagemReduzida, 0, 0, imagemReduzida.getWidth(),
-                                            imagemReduzida.getHeight(), matrix, true); // aqui
-            // sera
-            // rotacionada
-            // a
-            // imagem
-            // para
-            // ser
-            // organizada
-            imagem.setImageBitmap(rotated);
+            if (foto != null) {
+                final Bitmap imagemReduzida = Bitmap.createScaledBitmap(foto, 220, 220, true);
 
-        }
+                imagem.setImageBitmap(imagemReduzida);
+                final Matrix matrix = new Matrix();
+                matrix.postRotate(-90);
+                final Bitmap rotated =
+                                Bitmap.createBitmap(imagemReduzida, 0, 0,
+                                    imagemReduzida.getWidth(),
+                                                imagemReduzida.getHeight(), matrix, true); // aqui
+                // sera
+                // rotacionada
+                // a
+                // imagem
+                // para
+                // ser
+                // organizada
+                imagem.setImageBitmap(rotated);
+            } else {
 
-        else {
-
-            final Drawable semFoto =
-                            this.activity.getResources().getDrawable(R.drawable.sem_imagem);
-            imagem.setImageDrawable(semFoto);
+                final Drawable semFoto =
+                                this.activity.getResources().getDrawable(R.drawable.sem_imagem);
+                imagem.setImageDrawable(semFoto);
+            }
 
         }
 

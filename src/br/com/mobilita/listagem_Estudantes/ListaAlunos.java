@@ -22,8 +22,8 @@ import br.com.mobilita.Listagem_Estudantes_Adapter.LinhaAlunosAdapter;
 import br.com.mobilita.cadastro.modelo.Aluno;
 import br.com.mobilita.cadastro_caelum.Formulario;
 import br.com.mobilita.cadastro_caelum.MostraAlunosProximos;
-import br.com.mobilita.cadastro_caelum.Preferencias;
 import br.com.mobilita.cadastro_caelum.Provas;
+import br.com.mobilita.cadastro_caelum.testa_conectividade.TestaConexao;
 import br.com.mobilita.cadastrocaelum.R;
 import br.com.mobilita.dao.AlunoDAO;
 import br.com.mobilita.listagem_Estudantes.task.EnviaAlunosTask;
@@ -32,6 +32,7 @@ public class ListaAlunos extends ActionBarActivity {
 
     private ListView lista;
     private Aluno aluno;
+    private TestaConexao testa;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -43,14 +44,14 @@ public class ListaAlunos extends ActionBarActivity {
         registerForContextMenu(this.lista); // para mostrar no menu quando se é dado clique longo
 
         /*
-         *
+         * 
          * Clique curto usa-se este método
          */
         this.lista.setOnItemClickListener(new OnItemClickListener() {
 
             @Override
             public void onItemClick(final AdapterView<?> adapter, final View view,
-                                    final int position, final long id) {
+                            final int position, final long id) {
 
                 // Toast.makeText(ListaAlunos.this, "Posição clicada = " + (id + 1) + "",
                 // Toast.LENGTH_SHORT).show();
@@ -73,11 +74,7 @@ public class ListaAlunos extends ActionBarActivity {
 
             @Override
             public boolean onItemLongClick(final AdapterView<?> adapter, final View view,
-                                           final int posicao, final long id) {
-                //
-                // Toast.makeText(ListaAlunos.this,
-                // "Clique longo em = " + adapter.getItemAtPosition(posicao),
-                // Toast.LENGTH_SHORT).show();
+                            final int posicao, final long id) {
 
                 ListaAlunos.this.aluno = (Aluno) adapter.getItemAtPosition(posicao);
 
@@ -92,7 +89,7 @@ public class ListaAlunos extends ActionBarActivity {
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View v,
-                                    final ContextMenuInfo menuInfo) {
+                    final ContextMenuInfo menuInfo) {
 
         super.onCreateContextMenu(menu, v, menuInfo);
 
@@ -114,7 +111,7 @@ public class ListaAlunos extends ActionBarActivity {
                     startActivity(site);
                 } else {
                     Toast.makeText(ListaAlunos.this, "Estudante nao possui site", Toast.LENGTH_LONG)
-                    .show();
+                                    .show();
                 }
 
                 return false;
@@ -141,8 +138,8 @@ public class ListaAlunos extends ActionBarActivity {
         });
 
 
-        final MenuItem deletar = menu.add("Deletar"); // ao clicar longo uma opção do menu pode
-        // responder ao clique através de u evento
+        final MenuItem deletar = menu.add("Deletar");
+
         deletar.setOnMenuItemClickListener(new OnMenuItemClickListener() {
 
             @Override
@@ -152,32 +149,13 @@ public class ListaAlunos extends ActionBarActivity {
 
                 aluno.deletar(ListaAlunos.this.aluno);
 
-                // Toast.makeText(ListaAlunos.this, ListaAlunos.this.aluno.getNome(),
-                // Toast.LENGTH_SHORT).show();
-
-                aluno.close(); // sempre ao usar o DAO lembrar de fechar
+                aluno.close();
 
                 carregaLista();
 
                 return false;
             }
         });
-
-        final MenuItem localizacao = menu.add("Visualizar localizacao");
-
-        localizacao.setOnMenuItemClickListener(new OnMenuItemClickListener() {
-
-            @Override
-            public boolean onMenuItemClick(final MenuItem item) {
-
-                final Intent it = new Intent(ListaAlunos.this, MostraAlunosProximos.class);
-
-                startActivity(it);
-
-                return false;
-            }
-        });
-
 
         menu.add("Enviar e-mail");
 
@@ -214,12 +192,15 @@ public class ListaAlunos extends ActionBarActivity {
         inflater.inflate(R.menu.lista_alunos, menu);
 
         return super.onCreateOptionsMenu(menu);
+
     }
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
 
+
         final int itemClicado = item.getItemId();
+
 
         switch (itemClicado) {
             case R.id.novo:
@@ -228,9 +209,13 @@ public class ListaAlunos extends ActionBarActivity {
                 break;
 
             case R.id.enviar_alunos:
+                if (testaConexao()) {
+                    final EnviaAlunosTask enviaAlunosTask = new EnviaAlunosTask(this);
+                    enviaAlunosTask.execute();
+                } else {
 
-                final EnviaAlunosTask enviaAlunosTask = new EnviaAlunosTask(this);
-                enviaAlunosTask.execute();
+                    Toast.makeText(this, "Sem conexão com a internet", Toast.LENGTH_LONG).show();
+                }
                 break;
 
             case R.id.receber_provas:
@@ -241,9 +226,14 @@ public class ListaAlunos extends ActionBarActivity {
 
                 break;
 
-            case R.id.preferencias:
-                final Intent abreTelaPreferencias = new Intent(this, Preferencias.class);
-                startActivity(abreTelaPreferencias);
+            case R.id.mapa:
+                if (testaConexao()) {
+                    final Intent intencao =
+                                    new Intent(ListaAlunos.this, MostraAlunosProximos.class);
+                    startActivity(intencao);
+                } else {
+                    Toast.makeText(this, "Sem conexão com a internet", Toast.LENGTH_LONG).show();
+                }
                 break;
 
             default:
@@ -251,5 +241,17 @@ public class ListaAlunos extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public boolean testaConexao() {
+
+        this.testa = new TestaConexao(this);
+
+        if (this.testa.existeConexao()) {
+            return true;
+        } else {
+
+            return false;
+        }
     }
 }
