@@ -42,8 +42,8 @@ public class formularioHelper {
         return this.aluno;
     }
 
-    public void colocaAlunoParaSerAlterado(final Aluno alunoParaSerAlterado) {
-
+    public void colocaAlunoParaSerAlterado(final Aluno alunoParaSerAlterado,
+                                           final String caminhoArquivo) {
         this.aluno = alunoParaSerAlterado;
         this.et_nome.setText(alunoParaSerAlterado.getNome());
         this.et_endereco.setText(alunoParaSerAlterado.getEndereco());
@@ -51,7 +51,7 @@ public class formularioHelper {
         this.et_telefone.setText(alunoParaSerAlterado.getTelefone());
         this.rb_nota.setRating(alunoParaSerAlterado.getNotas().floatValue());
 
-        if (this.aluno.getFoto() != null) {
+        if ((caminhoArquivo != null)) {
 
             carregaImagem(alunoParaSerAlterado.getFoto());
         }
@@ -64,27 +64,22 @@ public class formularioHelper {
 
     public void carregaImagem(final String caminhoArquivo) {
 
-        if (caminhoArquivo != null) {
-            this.aluno.setFoto(caminhoArquivo);
+        this.aluno.setFoto(caminhoArquivo);
 
+        final Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
 
-            final Bitmap imagem = BitmapFactory.decodeFile(caminhoArquivo);
+        final Bitmap imagemReduzida = Bitmap.createScaledBitmap(imagem, 400, 400, true);
 
-            final Bitmap imagemReduzida = Bitmap.createScaledBitmap(imagem, 400, 400, true);
+        final Matrix matrix = new Matrix();
+        matrix.postRotate(-90);
+        final Bitmap rotated =
+                        Bitmap.createBitmap(imagemReduzida, 0, 0, imagemReduzida.getWidth(),
+                                        imagemReduzida.getHeight(), matrix, true); // aqui sera
+        // rotacionada a
+        // imagem para
+        // ser organizada
 
-            final Matrix matrix = new Matrix();
-            matrix.postRotate(-90);
-            final Bitmap rotated =
-                            Bitmap.createBitmap(imagemReduzida, 0, 0, imagemReduzida.getWidth(),
-                                            imagemReduzida.getHeight(), matrix, true); // aqui sera
-            // rotacionada a
-            // imagem para
-            // ser organizada
-
-            this.iv_foto.setImageBitmap(rotated);
-        }
-
-
+        this.iv_foto.setImageBitmap(rotated);
     }
 
 }

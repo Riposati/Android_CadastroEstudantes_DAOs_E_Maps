@@ -157,7 +157,7 @@ public class ListaAlunos extends ActionBarActivity {
             }
         });
 
-        menu.add("Enviar e-mail");
+        // menu.add("Enviar e-mail");
 
     }
 

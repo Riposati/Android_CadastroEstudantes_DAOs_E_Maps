@@ -5,7 +5,6 @@ import java.util.List;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -53,14 +52,13 @@ public class LinhaAlunosAdapter extends BaseAdapter {
         final LayoutInflater inflater = this.activity.getLayoutInflater();
         final View linha = inflater.inflate(R.layout.linha_listagem, null);
 
-        linha.setBackgroundColor(Color.BLACK);
+
 
         final TextView nome = (TextView) linha.findViewById(R.id.nome);
         final TextView telefone = (TextView) linha.findViewById(R.id.telefone);
         final TextView site = (TextView) linha.findViewById(R.id.site);
 
-
-        nome.setTextColor(Color.WHITE);
+        final Drawable semFoto;
 
         nome.setText(this.alunos.get(position).getNome());
 
@@ -70,16 +68,23 @@ public class LinhaAlunosAdapter extends BaseAdapter {
         if (this.alunos.get(position).getFoto() != null) {
 
             final Bitmap foto = BitmapFactory.decodeFile(this.alunos.get(position).getFoto());
-            if (foto != null) {
-                final Bitmap imagemReduzida = Bitmap.createScaledBitmap(foto, 220, 220, true);
 
+            if (foto == null) {
+
+                this.alunos.get(position).setFoto("");
+                semFoto = this.activity.getResources().getDrawable(R.drawable.sem_imagem);
+                imagem.setImageDrawable(semFoto);
+
+            } else {
+
+                final Bitmap imagemReduzida = Bitmap.createScaledBitmap(foto, 220, 220, true);
                 imagem.setImageBitmap(imagemReduzida);
                 final Matrix matrix = new Matrix();
                 matrix.postRotate(-90);
                 final Bitmap rotated =
                                 Bitmap.createBitmap(imagemReduzida, 0, 0,
                                     imagemReduzida.getWidth(),
-                                                imagemReduzida.getHeight(), matrix, true); // aqui
+                                    imagemReduzida.getHeight(), matrix, true); // aqui
                 // sera
                 // rotacionada
                 // a
@@ -88,22 +93,20 @@ public class LinhaAlunosAdapter extends BaseAdapter {
                 // ser
                 // organizada
                 imagem.setImageBitmap(rotated);
-            } else {
-
-                final Drawable semFoto =
-                                this.activity.getResources().getDrawable(R.drawable.sem_imagem);
-                imagem.setImageDrawable(semFoto);
             }
 
         }
 
+        else {
+            semFoto = this.activity.getResources().getDrawable(R.drawable.sem_imagem);
+            imagem.setImageDrawable(semFoto);
+        }
+
         if (telefone != null) {
-            telefone.setTextColor(Color.WHITE);
             telefone.setText(this.alunos.get(position).getTelefone());
         }
 
         if (site != null) {
-            site.setTextColor(Color.WHITE);
             site.setText(this.alunos.get(position).getSite());
         }
 

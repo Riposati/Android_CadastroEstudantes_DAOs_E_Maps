@@ -31,7 +31,6 @@ public class Formulario extends ActionBarActivity {
     private RatingBar rb_nota;
     private Aluno aluno;
     private String caminhoArquivo;
-    private EditText et_email;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -42,7 +41,7 @@ public class Formulario extends ActionBarActivity {
         Formulario.this.helper = new formularioHelper(Formulario.this);
 
         /*
-         *
+         * 
          * essas duas chamadas servem para organizar a classe Formulário
          */
 
@@ -52,7 +51,6 @@ public class Formulario extends ActionBarActivity {
         this.et_telefone = (EditText) findViewById(R.id.et_telefone);
         this.rb_nota = (RatingBar) findViewById(R.id.rb_nota);
         this.bt_gravar = (Button) findViewById(R.id.bt_gravar);
-        this.et_email = (EditText) findViewById(R.id.et_email);
 
         final Intent it = getIntent();
 
@@ -76,7 +74,7 @@ public class Formulario extends ActionBarActivity {
                     Formulario.this.aluno = Formulario.this.helper.pegaAlunoFormulario();
 
                     Toast.makeText(Formulario.this, "Aluno alterado com sucesso!",
-                        Toast.LENGTH_LONG).show();
+                                    Toast.LENGTH_LONG).show();
 
                     final AlunoDAO dao = new AlunoDAO(Formulario.this);
 
@@ -88,7 +86,7 @@ public class Formulario extends ActionBarActivity {
                 }
             });
 
-            this.helper.colocaAlunoParaSerAlterado(alunoSelecionado);
+            this.helper.colocaAlunoParaSerAlterado(alunoSelecionado, this.caminhoArquivo);
         } else {
 
             // aqui e pra guardar
@@ -104,7 +102,7 @@ public class Formulario extends ActionBarActivity {
 
                     if (Formulario.this.aluno.getNome().isEmpty()) {
                         Toast.makeText(Formulario.this, "Informe um nome!", Toast.LENGTH_LONG)
-                        .show();
+                                        .show();
                     } else {
 
                         final AlunoDAO dao = new AlunoDAO(Formulario.this);
@@ -119,7 +117,7 @@ public class Formulario extends ActionBarActivity {
         }
 
         /*
-         *
+         * 
          * Parte da imagem do estudante e daqui pra baixo
          */
 
@@ -129,6 +127,7 @@ public class Formulario extends ActionBarActivity {
 
             @Override
             public void onClick(final View v) {
+
 
                 final Intent irPraCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); // media
                 // store e
@@ -157,13 +156,14 @@ public class Formulario extends ActionBarActivity {
 
                 startActivityForResult(irPraCamera, 123);
             }
+
         });
 
     }
 
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode,
-                                    final Intent intencao) {
+                    final Intent intencao) {
 
         if (requestCode == 123) {
 

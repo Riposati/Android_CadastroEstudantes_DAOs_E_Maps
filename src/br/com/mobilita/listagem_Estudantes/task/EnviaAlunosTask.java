@@ -1,10 +1,12 @@
 package br.com.mobilita.listagem_Estudantes.task;
 
+import java.io.IOException;
 import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.Toast;
 import br.com.mobilita.cadastro.modelo.Aluno;
 import br.com.mobilita.dao.AlunoDAO;
@@ -25,7 +27,7 @@ public class EnviaAlunosTask extends AsyncTask<Integer, Double, String> {
 
         this.progress =
                         ProgressDialog.show(this.context, "Aguarde...",
-                            "Enviando dados pra web...", true, true);
+                                        "Enviando dados pra web...", true, true);
     }
 
     @Override
@@ -43,7 +45,14 @@ public class EnviaAlunosTask extends AsyncTask<Integer, Double, String> {
 
         final WebClient client = new WebClient(urlServidor);
 
-        final String respostaJson = client.post(dadosJson);
+        String respostaJson = null;
+        try {
+            respostaJson = client.post(dadosJson);
+        } catch (final IOException e) {
+            respostaJson = "Problemas na conexão";
+            Log.e("ERRO", "" + e.getMessage() + " na: " + this.getClass());
+            e.printStackTrace();
+        }
 
         // Log.i("resposta do servidor da caellum : ", respostaJson);
 
